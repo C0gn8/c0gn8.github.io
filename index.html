@@ -228,19 +228,19 @@
 <script>
   // ---- Paste each game's link between the quotes. Leave one empty and its card shows "Coming soon".
   const LINKS = {
-    unrest: '',            // e.g. 'https://yourname.itch.io/unrest'
-    iris: '',
-    fieldofsteel: '',
-    zombietactical: '',    // e.g. 'https://www.roblox.com/games/1234567890'
-    mechracer: '',
-    tankplanet: '',
-    mindpalace: '',        // Google Play link, once it's published
+    unrest: 'https://c0gn8.itch.io/unrest',            
+    iris: 'https://c0gn8.itch.io/iris-and-biscuit',
+    fieldofsteel: 'https://c0gn8.itch.io/field-of-steel-alpha',
+    zombietactical: 'https://www.roblox.com/games/140417461064491/Zombie-Tactical',    
+    mechracer: 'https://www.roblox.com/games/124815789662539/Mech-Racer',
+    tankplanet: 'https://www.roblox.com/games/115709956374413/Tank-Planet-Arena',
+    mindpalace: '',        
     brainypet: '',
-    youtube: '',           // Dr. Oli's Game Dev channel
-    foughtdisorder: '',
-    linguisticsbooks: '',
-    colouryourself: '',
-    linguisticschannel: '',
+    youtube: 'https://www.youtube.com/@DrOlisGamedev',           
+    foughtdisorder: 'https://books2read.com/u/3LWB71',
+    linguisticsbooks: 'https://www.amazon.co.uk/dp/B0GCRKXKH7',
+    colouryourself: 'https://www.amazon.co.uk/dp/B0HN7TMH9T?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk',
+    linguisticschannel: 'https://www.youtube.com/@insideschizophrenia',
   };
   document.querySelectorAll('.play[data-link]').forEach(el => {
     const url = LINKS[el.dataset.link];
