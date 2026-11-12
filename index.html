@@ -92,6 +92,15 @@
   .game .play .btn { padding: 8px 16px; font-size: 15px; }
   .game .play .soon { color: var(--dim); font-size: 15px; padding: 8px 0; }
 
+  /* independent reviews (filled in from REVIEWS at the bottom of the page; hidden until there's something to show) */
+  .review { display: flex; gap: 12px; align-items: flex-start; margin: -4px 0 16px; padding: 10px 12px; border-radius: 10px; background: rgba(109,255,154,.06); border: 1px solid rgba(109,255,154,.28); }
+  .review img { width: 56px; height: auto; flex: none; border-radius: 6px; }
+  .review blockquote { margin: 0 0 4px; color: var(--ink); font-size: 15px; font-style: italic; }
+  .review .by { color: var(--dim); font-size: 13px; }
+  .review .by a { color: var(--green); }
+  .reviewed { margin: -14px 0 28px; color: var(--green); font-weight: 600; }
+  .reviewed a { color: var(--green); }
+
   /* BrainyPet: no art yet, so a little drawn one */
   .game .pet-art { background: radial-gradient(circle at 50% 120%, #ffd6f0 0, #ffb4e1 30%, #a77bff 75%, #6f4bd6 100%); display: grid; place-items: center; }
   .game .pet-art svg { width: 46%; height: auto; filter: drop-shadow(0 8px 12px rgba(40,10,80,.35)); }
@@ -196,6 +205,7 @@
 <section id="learning">
   <h2>Learning games for children</h2>
   <p class="lead">£1 each, once, with nothing more to buy, no ads and no data collected. Paint and Learn is free everywhere, so you can try one first. Get the app for Fire tablets on Amazon or for Android on Google Play, or play on a computer with the itch.io download (it opens in your web browser and plays offline).</p>
+  <p class="reviewed" id="reviewed" hidden></p>
   <div class="grid">
     <article class="game">
       <div class="art pet-art">
@@ -374,6 +384,38 @@
     const url3 = el.dataset.link3 && LINKS[el.dataset.link3];
     if (url3) el.innerHTML += '<a class="btn alt" href="' + url3 + '" target="_blank" rel="noopener">' + el.dataset.label3 + '</a>';
   });
+  // ---- Independent reviews (Educational App Store). Fill these in when the reviews arrive; anything left empty stays hidden.
+  //   page: the game's review page   quote: a short quote, word for word   badge: badge image (e.g. 'img/eas/paintandlearn.png')
+  //   certificate: link to the certificate (optional)   site: NeuroKind's page on the Educational App Store
+  const REVIEWS = {
+    site: '',
+    brainypet:     { page: '', quote: '', badge: '', certificate: '' },
+    stickandlearn: { page: '', quote: '', badge: '', certificate: '' },
+    paintandlearn: { page: '', quote: '', badge: '', certificate: '' },
+    clevercafe:    { page: '', quote: '', badge: '', certificate: '' },
+    smartsports:   { page: '', quote: '', badge: '', certificate: '' },
+    mindpalace:    { page: '', quote: '', badge: '', certificate: '' },
+  };
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  let reviewed = 0;
+  document.querySelectorAll('.play[data-stores]').forEach(el => {
+    const r = REVIEWS[el.dataset.stores];
+    if (!r || !(r.page || r.quote || r.badge)) return;
+    reviewed++;
+    const link = (href, text) => '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + text + '</a>';
+    const img = r.badge ? '<img src="' + esc(r.badge) + '" alt="Reviewed by the Educational App Store">' : '';
+    const by = [r.page ? link(r.page, 'Read the review') : '', r.certificate ? link(r.certificate, 'Certificate') : ''].filter(Boolean).join(' · ');
+    const box = document.createElement('div');
+    box.className = 'review';
+    box.innerHTML = (r.badge && r.page ? link(r.page, img) : img) + '<div>' + (r.quote ? '<blockquote>&ldquo;' + esc(r.quote) + '&rdquo;</blockquote>' : '')
+      + '<div class="by">Educational App Store' + (by ? ' · ' + by : '') + '</div></div>';
+    el.parentNode.insertBefore(box, el);
+  });
+  if (reviewed || REVIEWS.site) {
+    const p = document.getElementById('reviewed');
+    p.innerHTML = '&#10003; Independently reviewed by the ' + (REVIEWS.site ? '<a href="' + esc(REVIEWS.site) + '" target="_blank" rel="noopener">Educational App Store</a>' : 'Educational App Store') + '.';
+    p.hidden = false;
+  }
   const STORES = [['amazon', 'Amazon · Fire tablets'], ['play', 'Google Play'], ['itch', 'Computer · itch.io']];
   document.querySelectorAll('.play[data-stores]').forEach(el => {
     const k = el.dataset.stores;
