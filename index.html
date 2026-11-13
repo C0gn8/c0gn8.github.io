@@ -416,12 +416,21 @@
     p.innerHTML = '&#10003; Independently reviewed by the ' + (REVIEWS.site ? '<a href="' + esc(REVIEWS.site) + '" target="_blank" rel="noopener">Educational App Store</a>' : 'Educational App Store') + '.';
     p.hidden = false;
   }
+  // ---- Store sales: 'game_store': 'last day of the sale' (YYYY-MM-DD). The button says "free until ..." and goes back by itself after that day.
+  const FREE_UNTIL = { brainypet_play: '2026-11-20' };
   const STORES = [['amazon', 'Amazon · Fire tablets'], ['play', 'Google Play'], ['itch', 'Computer · itch.io']];
+  function saleText(key) {
+    const end = FREE_UNTIL[key];
+    if (!end) return '';
+    const last = new Date(end + 'T23:59:59');
+    if (new Date() > last) return '';
+    return ' · free until ' + last.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  }
   document.querySelectorAll('.play[data-stores]').forEach(el => {
     const k = el.dataset.stores;
     const free = (el.dataset.free || '').split(' ');
     const btns = STORES.filter(([s]) => LINKS[k + '_' + s]).map(([s, label], i) =>
-      '<a class="btn' + (i ? ' alt' : '') + '" href="' + LINKS[k + '_' + s] + '" target="_blank" rel="noopener">' + label + (free.includes(s) ? ' · free' : '') + '</a>');
+      '<a class="btn' + (i ? ' alt' : '') + '" href="' + LINKS[k + '_' + s] + '" target="_blank" rel="noopener">' + label + (free.includes(s) ? ' · free' : saleText(k + '_' + s)) + '</a>');
     el.innerHTML = btns.length ? btns.join('') : '<span class="soon">Coming soon</span>';
     const badge = el.closest('.game').querySelector('.badge.test');
     if (btns.length && badge) { badge.className = 'badge out'; badge.textContent = 'OUT NOW'; }
