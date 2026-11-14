@@ -72,6 +72,16 @@
   section .motto { margin: 2px 0 10px; font: 700 clamp(17px, 2.2vw, 21px)/1.35 'Orbitron', sans-serif; letter-spacing: .02em; color: var(--ink); }
   section .motto b { color: var(--green); font-weight: 800; }
   section .motto span { display: block; margin-top: 4px; font: 600 16px/1.4 inherit; font-family: inherit; color: var(--gold); letter-spacing: .03em; }
+  /* what families say (filled from FAMILY_REVIEWS at the bottom of the page; hidden while it's empty) */
+  .families { margin-top: 34px; }
+  .families h3 { font: 700 19px 'Orbitron', sans-serif; letter-spacing: .03em; margin: 0 0 14px; }
+  .families .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; }
+  .fam { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 0; }
+  .fam .stars { color: var(--gold); letter-spacing: 2px; font-size: 16px; }
+  .fam blockquote { margin: 6px 0 4px; font-size: 17px; color: var(--ink); }
+  .fam .orig { color: var(--dim); font-size: 14px; margin: 0 0 8px; }
+  .fam figcaption { color: var(--dim); font-size: 14px; }
+  .fam figcaption b { color: var(--cyan); font-weight: 600; }
   section h3.sub { font: 700 19px 'Orbitron', sans-serif; letter-spacing: .03em; margin: 34px 0 14px; }
   section h3.sub .where { color: var(--cyan); }
   section h3.sub + .lead { margin-top: -8px; }
@@ -256,6 +266,10 @@
         <div class="play" data-stores="mindpalace"></div></div>
     </article>
   </div>
+  <div class="families" id="families" hidden>
+    <h3>What families say</h3>
+    <div class="list"></div>
+  </div>
 </section>
 
 <section id="grownups">
@@ -415,6 +429,20 @@
       + '<div class="by">Educational App Store' + (by ? ' · ' + by : '') + '</div></div>';
     el.parentNode.insertBefore(box, el);
   });
+  // ---- What families say: real store reviews, word for word. text = English (translated if needed), original = the
+  //   reviewer's own words when not in English, source = where it's from. The section stays hidden while this is empty.
+  const FAMILY_REVIEWS = [
+    { game: 'BrainyPet', stars: 5, text: "It's nice to use.", original: '사용하기 좋아요', source: 'Google Play review, South Korea', lang: 'ko' },
+  ];
+  if (FAMILY_REVIEWS.length) {
+    const box = document.getElementById('families');
+    box.querySelector('.list').innerHTML = FAMILY_REVIEWS.map(r =>
+      '<figure class="fam"><div class="stars" aria-label="' + r.stars + ' out of 5 stars">' + '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars) + '</div>'
+      + '<blockquote>&ldquo;' + esc(r.text) + '&rdquo;</blockquote>'
+      + (r.original ? '<p class="orig">Original: <span lang="' + (r.lang || '') + '">' + esc(r.original) + '</span></p>' : '')
+      + '<figcaption><b>' + esc(r.game) + '</b> · ' + esc(r.source) + '</figcaption></figure>').join('');
+    box.hidden = false;
+  }
   if (reviewed || REVIEWS.site) {
     const p = document.getElementById('reviewed');
     p.innerHTML = '&#10003; Independently reviewed by the ' + (REVIEWS.site ? '<a href="' + esc(REVIEWS.site) + '" target="_blank" rel="noopener">Educational App Store</a>' : 'Educational App Store') + '.';
