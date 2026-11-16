@@ -55,6 +55,19 @@
   .ways span { display: block; font-size: 15px; line-height: 1.5; color: #e9e2f7; }
   .ways i { display: block; font-style: normal; font-size: 13px; color: var(--pink); margin-top: 8px; }
   @media (max-width: 720px) { .ways { grid-template-columns: 1fr; } }
+  .deal { margin: 0 auto 18px; max-width: 760px; font: 700 clamp(17px, 2.3vw, 22px)/1.4 'Orbitron', sans-serif; color: #fff; text-shadow: 0 1px 10px rgba(18,6,36,.95); }
+  .deal b { color: var(--gold); }
+  .deal span { display: block; font: 600 clamp(15px, 1.9vw, 17px)/1.5 inherit; font-family: inherit; color: var(--green); letter-spacing: .02em; margin-top: 4px; }
+  .value { border: 1px solid var(--gold); background: linear-gradient(180deg, rgba(255,200,97,.10), rgba(22,12,40,.6)); border-radius: 18px; padding: 22px 22px 18px; margin: 18px 0 22px; }
+  .value h3 { margin: 0 0 8px; font: 800 clamp(18px, 2.4vw, 24px)/1.3 'Orbitron', sans-serif; color: var(--gold); }
+  .value > p { margin: 0 0 16px; line-height: 1.6; color: var(--ink); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stats div { background: rgba(22,12,40,.9); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+  .stats b { display: block; font: 800 34px/1 'Orbitron', sans-serif; color: var(--green); margin-bottom: 6px; }
+  .stats span { display: block; font-size: 15px; line-height: 1.4; color: var(--ink); }
+  .stats i { display: block; font-style: normal; font-size: 13px; color: var(--dim); margin-top: 8px; }
+  @media (max-width: 820px) { .stats { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 460px) { .stats { grid-template-columns: 1fr; } }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 0; padding: 0; list-style: none; }
   .chips li { border: 1px solid var(--line); background: rgba(26,17,48,.8); border-radius: 999px; padding: 6px 16px; font-weight: 500; }
   .chips li b { color: var(--green); }
@@ -161,6 +174,7 @@
       <div><b>Learn by example</b><span>Watch a curious penguin study the real Arctic sky, read and make things, and catch his curiosity.</span><i>Charleston</i></div>
     </div>
   </div>
+  <p class="deal"><b>Nearly 600 lessons</b> across six learning games. <span>£1 a game, paid once. Never a subscription.</span></p>
   <ul class="chips"><li><b>✓</b> No ads</li><li><b>✓</b> No microtransactions</li><li><b>✓</b> No data collected</li></ul>
   <div class="jump"><a class="btn" href="#children">Free games for children</a><a class="btn" href="#learning">Learning games</a><a class="btn alt" href="#grownups">Games for grown-ups</a><a class="btn alt" href="#research">Tools for researchers</a></div>
 </div></div>
@@ -218,6 +232,16 @@
 <section id="learning">
   <h2>Learning games for children</h2>
   <p class="motto"><b>Play first, learn second.</b> Games kids love, with learning built in.<span>No ads, no data, nothing to buy.</span></p>
+  <div class="value">
+    <h3>Nearly 600 lessons for £1 a game. Paid once, kept forever.</h3>
+    <p>Some learning apps charge every week for a handful of lessons. Ours cost £1, once, and every lesson is in the game from the start. Nothing is locked, there are no subscriptions and no free trials that turn into payments.</p>
+    <div class="stats">
+      <div><b>63</b><span>spoken questions in 8 subjects</span><i>BrainyPet · Stick and Learn · Paint and Learn · ages 3 to 6</i></div>
+      <div><b>104</b><span>maths and money lessons in 7 strands</span><i>Clever Cafe · ages 6 to 10</i></div>
+      <div><b>415</b><span>questions, each with its own spoken clip</span><i>Smart Sports · ages 6 to 10</i></div>
+      <div><b>∞</b><span>fresh puzzles every game, from 39 kinds of question</span><i>Mind Palace · ages 9 and up</i></div>
+    </div>
+  </div>
   <p class="lead">£1 each, once. Paint and Learn is free everywhere, so you can try one first. Get the app for Fire tablets on Amazon or for Android on Google Play, or play on a computer with the itch.io download (it opens in your web browser and plays offline).</p>
   <p class="reviewed" id="reviewed" hidden></p>
   <div class="grid">
