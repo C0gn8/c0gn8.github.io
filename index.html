@@ -398,7 +398,7 @@
     brainypet_play: 'https://play.google.com/store/apps/details?id=com.brainypet.myapp',
     brainypet_amazon: 'https://www.amazon.co.uk/dp/B0HQHH8DWK',
     stickandlearn_itch: 'https://c0gn8.itch.io/stick-and-learn',
-    stickandlearn_play: '',
+    stickandlearn_play: 'https://play.google.com/store/apps/details?id=com.neurokind.stickandlearn',
     stickandlearn_amazon: 'https://www.amazon.co.uk/dp/B0HQHJ6FQ3',
     paintandlearn_itch: 'https://c0gn8.itch.io/paint-and-learn',
     paintandlearn_play: '',
@@ -474,7 +474,7 @@
     p.hidden = false;
   }
   // ---- Store sales: 'game_store': 'last day of the sale' (YYYY-MM-DD). The button says "free until ..." and goes back by itself after that day.
-  const FREE_UNTIL = { brainypet_play: '2026-11-20' };
+  const FREE_UNTIL = {};
   const STORES = [['amazon', 'Amazon · Fire tablets'], ['play', 'Google Play'], ['itch', 'Computer · itch.io']];
   function saleText(key) {
     const end = FREE_UNTIL[key];
